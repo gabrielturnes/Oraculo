@@ -14,9 +14,9 @@ import java.util.logging.Logger;
  * Cliente de uma aplica¸c~ao Java RMI
  */
 public class ClienteOraculo {
-    private static String nomeServidor = "191.36.13.84";
+    private static String nomeServidor = "191.36.13.100";
     private static int porta = 12345;
-    private static final String NOMEOBJDIST = "MeuOraculo";
+    private static final String NOMEOBJDIST = "MeuContador";
     public static void main(String args[]) {
         try {
             if (args[0] != null){
@@ -33,8 +33,7 @@ public class ClienteOraculo {
             Scanner sc1 = new Scanner(System.in);
             int opcao = 0;
             do {
-                System.out
-                        .println("\n\n### Oraculo ###");
+                System.out.println("\n\n### Oraculo ###");
                 System.out.println("\n                  =========================");
                 System.out.println("                  |     1 - Gerar senha   |");
                 System.out.println("                  |     2 - Vencedor      |");
@@ -46,7 +45,7 @@ public class ClienteOraculo {
                 switch (opcao) {
                     case 1:
                         System.out.println("Qual o seu nome?");
-                        String nome = sc1.nextLine();
+                        String nome = sc1.next();
                         int senha = stub.gerarSenha(nome);
                         if(senha == -1){
                             System.out.println("Todas as senhas já foram distribuídas.");
@@ -56,7 +55,7 @@ public class ClienteOraculo {
                         break;
                     case 2:
                         String resultado = stub.gerarResultado();
-                        if(resultado == "SemVencedor"){
+                        if(resultado.equals("SemVencedor")){
                             System.out.println("As 4 senhas ainda não foram geradas. Volte mais tarde.");
                         }else{
                             System.out.println("O vencedor é " + resultado);
